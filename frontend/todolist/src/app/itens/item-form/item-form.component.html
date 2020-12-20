@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header bg-primary text-light">
+    {{item.title}}
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #form="ngForm" >
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" class="form-control" [(ngModel)]="item.title" name="title" #title="ngModel" required minlength="3" />
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="aler alert-danger">
+          <div *ngIf="title.errors.required">
+            Título é obrigatório
+          </div>
+          <div *ngIf="title.errors.minlength">
+            Título precisa ter no mínimo 4 letras
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Descrição</label>
+        <input type="text" class="form-control" [(ngModel)]="item.description" name="description" #description="ngModel" required minlength="10"/>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="aler alert-danger">
+          <div *ngIf="description.errors.required">
+            Descrição é obrigatório
+          </div>
+          <div *ngIf="description.errors.minlength">
+            Descrição precisa ter no mínimo 10 letras
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!form.form.valid" class="btn btn-primary">Salvar</button>
+      <a routerLink="/itens" class="btn btn-secondary ml-2">Cancelar</a>
+    </form>
+
+  </div>
+</div>
